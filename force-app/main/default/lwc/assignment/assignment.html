@@ -1,0 +1,32 @@
+<template>
+    <h2> Account Datatable</h2>
+    <lightning-card>
+        <template if:true={data}>
+            <lightning-datatable
+            data={data} 
+            columns={columns} 
+            onsave={handleSave} 
+            draft-values={draftValues}
+            onrowaction={handleRowActions}
+            hide-checkbox-column
+            key-field="Id"
+            load-more-offset={loadMoreOffset}
+            onloadmore={handleLoadMore}>
+            </lightning-datatable>
+        </template>
+        <template lwc:if={data}>
+            <c-child-paginator onprevious={prevHandler}  onnext={nextHandler}> </c-child-paginator>
+        </template>
+        <template if:true = {showChild}>
+            <div class = "slds-m-around-medium">
+                <c-child-component
+                    account-id = {recordId}>
+                </c-child-component>
+                <lightning-button label=" Hide" onclick= {hideContacts}></lightning-button>
+            </div>
+        </template>
+
+
+    </lightning-card>
+    
+</template>
